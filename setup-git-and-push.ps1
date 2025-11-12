@@ -46,11 +46,9 @@ if ($LASTEXITCODE -ne 0) {
 
 # 5. Adicionar remote e fazer push
 Write-Host "`n[5/5] Adicionando remote 'origin' e fazendo push..."
-git remote add origin https://github.com/Jgui18/RPG-Master-Manager.git
-if ($LASTEXITCODE -ne 0) {
-    Write-Error "Falha ao adicionar remote (ou remote ja existe)"
-    exit 1
-}
+git remote add origin https://github.com/Jgui18/RPG-Master-Manager.git 2>$null
+# Ignorar erro se remote ja existe
+Write-Host "Remote 'origin' configurado (ou ja existia)"
 
 git push -u origin main
 if ($LASTEXITCODE -ne 0) {
