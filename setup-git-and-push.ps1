@@ -52,11 +52,19 @@ Write-Host "Remote 'origin' configurado (ou ja existia)"
 
 git push -u origin main
 if ($LASTEXITCODE -ne 0) {
-    Write-Error "Falha ao fazer push"
-    Write-Host "`nDica: Se a autenticacao falhou, pode ser necessario:"
-    Write-Host "  - Usar um Personal Access Token (PAT) ao inves de senha"
-    Write-Host "  - Autenticar com: gh auth login (se tiver GitHub CLI)"
-    exit 1
+    Write-Host "`nTentando fazer pull primeiro (remote tem conteudo diferente)..."
+    git pull origin main --allow-unrelated-histories
+    if ($LASTEXITCODE -eq 0) {
+        Write-Host "Pull concluido. Tentando push novamente..."
+        git push -u origin main
+    }
+    if ($LASTEXITCODE -ne 0) {
+        Write-Error "Falha ao fazer push"
+        Write-Host "`nDica: Se a autenticacao falhou, pode ser necessario:"
+        Write-Host "  - Usar um Personal Access Token (PAT) ao inves de senha"
+        Write-Host "  - Autenticar com: gh auth login (se tiver GitHub CLI)"
+        exit 1
+    }
 }
 
 Write-Host "`n=== OK Push concluido com sucesso! ===" -ForegroundColor Green
