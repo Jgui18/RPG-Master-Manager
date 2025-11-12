@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # RPG Master Tools
 
 Sistema completo de ferramentas para mestres de RPG usando React com TypeScript e Tailwind CSS. O site é totalmente estático e funciona no client-side, podendo ser hospedado em qualquer serviço de hospedagem estática como Netlify, Vercel ou GitHub Pages.
@@ -204,3 +205,6 @@ Este projeto é de código aberto e está disponível para uso livre.
 
 Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou pull requests.
 
+=======
+# RPG-Master-Manager
+>>>>>>> 557ba55fd9d519fa0aea0adc7ce40e53bb187da1

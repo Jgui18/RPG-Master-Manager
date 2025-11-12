@@ -54,8 +54,15 @@ git push -u origin main
 if ($LASTEXITCODE -ne 0) {
     Write-Host "`nTentando fazer pull primeiro (remote tem conteudo diferente)..."
     git pull origin main --allow-unrelated-histories
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host "`nConflito de merge detectado. Resolvendo automaticamente..."
+        # Aceitar versao remota para arquivos em conflito
+        git checkout --theirs .
+        git add .
+        git commit -m "Merge remote branch (accept remote version)"
+    }
     if ($LASTEXITCODE -eq 0) {
-        Write-Host "Pull concluido. Tentando push novamente..."
+        Write-Host "Pull/Merge concluido. Tentando push novamente..."
         git push -u origin main
     }
     if ($LASTEXITCODE -ne 0) {
